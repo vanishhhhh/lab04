@@ -3,6 +3,6 @@ version: 1.0.{build}
 image: Visual Studio 2022
 
 build_script:
-  - cmake -S . -B _build
+  - cmake -S lab04 -B _build
   - cmake --build _build --config Release
   - cmake --build _build --config Release --target install
