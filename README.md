@@ -283,3 +283,6 @@ Discovering tests...OK
 Build success
 ```
 </details>
+
+
+### Также хочу отметить что пришлось поменять required version во всех CMakeLists, так как это вызывало ошибку при сборке appveyor
