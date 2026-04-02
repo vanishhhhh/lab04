@@ -1,11 +1,26 @@
-name: CI/CD on GitHub
+name: CI
 
 on: [push, pull_request]
 
 jobs:
-  build:
-    name: Build step
+  build-linux:
     runs-on: ubuntu-latest
-    steps:
 
-      - run: echo "build step"
+    strategy:
+      matrix:
+        compiler: [gcc,clang]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install CMake
+      run: sudo apt-get update && sudo-apt install -y cmake
+
+      - name: Configure
+      run: cmake -S . -B _build -DCMAKE_CXX_COMPILER=${{matrix.compiler}} -DCMAKE_INSTALL_PREFIX=_install
+
+      - name: Build
+      run: cmake --build _build
+
+      - name: Install
+      run: cmake --build _build --target install
